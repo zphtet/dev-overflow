@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "./context/themeProvider";
 export const metadata: Metadata = {
   title: "DevOverflow",
   description: "this is the stack overflow clone website ",
@@ -20,7 +21,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} `}>
-          <main>{children}</main>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="min-h-screen dark:bg-dark-200">{children}</main>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
