@@ -1,9 +1,18 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Logo from "./logo";
 import Image from "next/image";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import LeftSideBar from "./left-sidebar";
 export default function MobileNav() {
+  const closeHandler = () => {
+    document.getElementById("sheetclose")?.click();
+  };
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -23,7 +32,11 @@ export default function MobileNav() {
         <div className="px-2 py-5">
           <Logo isMobile={true} />
         </div>
-        <LeftSideBar isMobileNav={true} />
+        {/* <SheetClose onClick={() => alert("clicked")}> */}
+        <div className="w-full" onClick={closeHandler}>
+          <LeftSideBar isMobileNav={true} />
+        </div>
+        {/* </SheetClose> */}
       </SheetContent>
     </Sheet>
   );
