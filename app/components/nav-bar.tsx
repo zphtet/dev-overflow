@@ -6,7 +6,7 @@ import ThemeSwitcher from "./theme-switcher";
 import SearchInput from "./search-input";
 const Navbar = () => {
   return (
-    <div className="py-5 border flex items-center justify-between sm:px-5">
+    <div className="py-5 flex items-center justify-between sm:px-5 shadow">
       <Link href={"/"} className="flex items-center gap-3">
         <Image
           src="/assets/images/site-logo.svg"
