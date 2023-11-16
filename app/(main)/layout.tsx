@@ -18,7 +18,7 @@ export default function MainLayout({
         <div className="w-max dark:bg-dark-200  overflow-y-auto left-sidebar-container shadow dark:border-r-2 dark:border-gray-500">
           <LeftSideBar />
         </div>
-        <div className="h-full flex-1 p-5 bg-light-850  overflow-y-auto">
+        <div className="h-full flex-1 p-5 bg-light-850 dark:bg-dark-100  overflow-y-auto">
           {children}
         </div>
         <div className="w-max max-w-[350px] shadow overflow-y-auto hidden xl:block">

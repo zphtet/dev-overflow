@@ -79,6 +79,10 @@
   .active-nav-link {
     @apply text-white  bg-gradient-to-r  from-primary-color to-primary-color-dark;
   }
+  .main-gradient-bg {
+    @apply text-white dark:text-white  bg-gradient-to-r  from-primary-color to-primary-color-dark;
+  }
+
   .nav-link {
     @apply hover:text-white hover:bg-gradient-to-r  hover:from-primary-color hover:to-primary-color-dark;
   }

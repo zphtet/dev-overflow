@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
+import Tag from "./Tag";
 const PopularTags = () => {
   return (
     <div>
@@ -12,12 +12,7 @@ const PopularTags = () => {
               key={num}
               className="top-tage-item  py-1 flex items-center justify-between"
             >
-              <Button
-                variant={"secondary"}
-                className="uppercase text-light-500"
-              >
-                Nextjs
-              </Button>
+              <Tag text="react" size="sm" textsize="small" />
               <Badge variant={"secondary"}>12</Badge>
             </div>
           );
