@@ -17,7 +17,7 @@ const Tag = ({ size, textsize, text }: TagProps) => {
     <Button
       variant={"secondary"}
       size={size || "default"}
-      className={`uppercase text-light-500 ${fontsize}`}
+      className={` text-light-500 ${fontsize} font-light`}
     >
       {text}
     </Button>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import SearchInput from "./components/search-input";
 import Tag from "./components/Tag";
+import Filter from "./components/Filter";
 export default function Home() {
   return (
     <div className="h-[200vh]">
@@ -10,14 +11,17 @@ export default function Home() {
           Ask a Question
         </Button>
       </div>
-      <div className="py-5">
+      <div className="sm:py-5 py-3">
         <SearchInput placeholder="search ... " />
       </div>
-      <div className="tags-container space-x-4">
-        <Tag text="NextJS" />
-        <Tag text="CSS" />
-        <Tag text="React" />
-        <Tag text="Typescript" />
+      <div className="tags-container space-x-4 hidden sm:block">
+        <Tag text="Newest" />
+        <Tag text="Recommended" />
+        <Tag text="Frequent" />
+        <Tag text="Unanswered" />
+      </div>
+      <div className="sm:hidden block">
+        <Filter />
       </div>
     </div>
   );
