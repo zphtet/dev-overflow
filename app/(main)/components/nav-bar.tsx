@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className="py-5 flex items-center justify-between px-5 shadow">
       <Logo />
-      <div className="hidden sm:block w-[450px]">
+      <div className="hidden lg:block w-[450px]">
         <SearchInput placeholder="search globally ... " />
       </div>
       <div className="flex gap-5 items-center">

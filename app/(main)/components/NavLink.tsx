@@ -13,11 +13,11 @@ const NavLink = ({ href, icon, label, isMobileNav }: Props) => {
   const active = pathname === href;
   return (
     <div
-      className={` px-4 py-4 rounded-md cursor-pointer nav-link  text-base ${
+      className={`  rounded-md cursor-pointer nav-link  text-base ${
         active && "active-nav-link"
       } `}
     >
-      <Link href={href} className=" flex items-center gap-3 ">
+      <Link href={href} className=" flex items-center gap-3 px-4 py-4 ">
         <Image
           alt={`icon for ${label}`}
           src={icon}

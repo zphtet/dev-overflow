@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import SearchInput from "./components/search-input";
 import Tag from "./components/Tag";
 import Filter from "./components/Filter";
+import QuestionCards from "./components/question-cards";
 export default function Home() {
   return (
     <div className="h-[200vh]">
@@ -22,6 +23,9 @@ export default function Home() {
       </div>
       <div className="sm:hidden block">
         <Filter />
+      </div>
+      <div className="py-5">
+        <QuestionCards />
       </div>
     </div>
   );
