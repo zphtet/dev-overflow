@@ -11,7 +11,7 @@ const Card = () => {
       <div>
         <Tag text="NextJs" size="sm" textsize="small" />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex md:items-center justify-between md:flex-row flex-col gap-3">
         <div className="flex items-center gap-1">
           <Image
             src={"/assets/icons/user.svg"}
@@ -25,7 +25,7 @@ const Card = () => {
             <span className="text-[12px]">. asked 30 days ago</span>
           </p>
         </div>
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-2 sm:gap-5 items-center">
           <div className="flex items-center text-[12px] gap-1">
             <Image
               src={"/assets/icons/like.svg"}
