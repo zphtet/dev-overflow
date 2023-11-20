@@ -3,7 +3,7 @@ import Tag from "./Tag";
 
 const Card = () => {
   return (
-    <div className="bg-white rounded shadow p-5 space-y-4">
+    <div className="bg-white rounded shadow p-5 space-y-4 dark:bg-dark-300">
       <p className="font-bold text-xl line-clamp-1">
         Best pratices for building Next.js Application . Please Answer these
         question
