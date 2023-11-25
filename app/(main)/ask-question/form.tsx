@@ -14,13 +14,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { KeyboardEvent, KeyboardEventHandler, useRef } from "react";
-import { Badge } from "@/components/ui/badge";
-import { ShieldCloseIcon, X } from "lucide-react";
+import { KeyboardEvent, useRef } from "react";
+import { X } from "lucide-react";
+import { createQuestion } from "@/app/action/question";
 const formSchema = z.object({
   title: z.string().min(5, { message: "must be 5 chars or more" }),
   explaination: z.string().min(100, { message: "must be 100 chars or more" }),
-  tags: z.array(z.string().min(1).min(15)).min(1).max(3),
+  tags: z
+    .array(z.string())
+    .min(1, { message: "at least one tag is required" })
+    .max(3, { message: "maximum three tags are allowed" }),
 });
 
 const AskQuestionForm = () => {
@@ -37,10 +40,17 @@ const AskQuestionForm = () => {
   const editorRef = useRef(null);
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    await createQuestion({
+      title: values.title,
+      content: values.explaination,
+      tags: values.tags,
+      author: "5fbdbf4703f22b52be1188b5",
+    });
+    console.log("Create question successfully");
   }
 
   const onChnageHandler = (e: KeyboardEvent<HTMLInputElement>, field: any) => {
@@ -109,6 +119,8 @@ const AskQuestionForm = () => {
                     // @ts-ignore
                     return (editorRef.current = editor);
                   }}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue=""
                   init={{
                     height: 350,
@@ -172,6 +184,7 @@ const AskQuestionForm = () => {
                     onKeyDown={(e) => onChnageHandler(e, field)}
                     className="focus:ring-none focus-visible:outline-none focus-visible:ring-0 outline-none py-6 focus-visible:ring-transparent"
                   />
+                  {/* {console.log(field.value)} */}
                   {field.value.length > 0 && (
                     <div className="flex items-center gap-3">
                       {field?.value?.map((tag) => {
