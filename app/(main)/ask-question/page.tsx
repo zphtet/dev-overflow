@@ -1,14 +1,14 @@
-import AskQuestionFrom from "./form";
+import AskQuestionForm from "./form";
 import connectDB from "@/database/connectDB";
 const AskQuestion = async () => {
-  await connectDB();
+  // await connectDB();
   return (
     <div>
       <div>
         <h4 className="font-bold text-2xl">Ask Question</h4>
       </div>
       <div className="my-5">
-        <AskQuestionFrom />
+        <AskQuestionForm />
       </div>
     </div>
   );

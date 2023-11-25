@@ -23,7 +23,7 @@ const formSchema = z.object({
   tags: z.array(z.string().min(1).min(15)).min(1).max(3),
 });
 
-const AskQuestionFrom = () => {
+const AskQuestionForm = () => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -216,4 +216,4 @@ const AskQuestionFrom = () => {
     </Form>
   );
 };
-export default AskQuestionFrom;
+export default AskQuestionForm;
