@@ -1,6 +1,7 @@
 import AskQuestionFrom from "./form";
-
-const AskQuestion = () => {
+import connectDB from "@/database/connectDB";
+const AskQuestion = async () => {
+  await connectDB();
   return (
     <div>
       <div>
