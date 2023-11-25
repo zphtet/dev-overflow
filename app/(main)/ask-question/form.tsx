@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { KeyboardEvent, useRef } from "react";
 import { X } from "lucide-react";
 import { createQuestion } from "@/app/action/question";
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
   title: z.string().min(5, { message: "must be 5 chars or more" }),
   explaination: z.string().min(100, { message: "must be 100 chars or more" }),
@@ -26,8 +27,9 @@ const formSchema = z.object({
     .max(3, { message: "maximum three tags are allowed" }),
 });
 
-const AskQuestionForm = () => {
+const AskQuestionForm = ({ userId }: { userId: string }) => {
   // 1. Define your form.
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,9 +50,11 @@ const AskQuestionForm = () => {
       title: values.title,
       content: values.explaination,
       tags: values.tags,
-      author: "5fbdbf4703f22b52be1188b5",
+      author: userId,
+      path: "/",
     });
     console.log("Create question successfully");
+    router.push("/");
   }
 
   const onChnageHandler = (e: KeyboardEvent<HTMLInputElement>, field: any) => {

@@ -3,7 +3,13 @@ import SearchInput from "./components/search-input";
 import Tag from "./components/Tag";
 import Filter from "./components/Filter";
 import QuestionCards from "./components/question-cards";
-export default function Home() {
+import { getQuestions } from "@/app/action/question";
+import { getUser } from "@/app/action/user";
+// import { IQuestion } from "@/database/models/question.model";
+export default async function Home() {
+  await getUser("fackid");
+  const questions = await getQuestions();
+  // const questions = [];
   return (
     <div className="h-[200vh]">
       <div className="flex items-center justify-between">
@@ -25,7 +31,7 @@ export default function Home() {
         <Filter />
       </div>
       <div className="py-5">
-        <QuestionCards />
+        <QuestionCards data={questions} />
       </div>
     </div>
   );

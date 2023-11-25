@@ -1,27 +1,33 @@
 import Image from "next/image";
 import Tag from "./Tag";
 
-const Card = () => {
+const Card = ({ data }: { data: any }) => {
+  console.log(data);
   return (
     <div className="bg-white rounded shadow p-5 space-y-4 dark:bg-dark-300">
-      <p className="font-bold text-xl line-clamp-1">
-        Best pratices for building Next.js Application . Please Answer these
-        question
-      </p>
-      <div>
-        <Tag text="NextJs" size="sm" textsize="small" />
+      <p className="font-bold text-xl line-clamp-1">{data.title}</p>
+      <div className="flex items-center gap-2">
+        {/* {
+          data.tags.map((tag))
+        } */}
+        {data.tags.map((tag: any) => {
+          return (
+            <Tag text={tag.name} key={tag._id} size="sm" textsize="small" />
+          );
+        })}
+        {/* <Tag text="NextJs" size="sm" textsize="small" /> */}
       </div>
       <div className="flex md:items-center justify-between md:flex-row flex-col gap-3">
         <div className="flex items-center gap-1">
           <Image
-            src={"/assets/icons/user.svg"}
+            src={"/"}
             alt="profile pic"
             width={"18"}
             height={"18"}
             className="invert border rounded-full"
           />
           <p className="text-sm">
-            Sujata | Js Matery{" "}
+            {data.author?.name}
             <span className="text-[12px]">. asked 30 days ago</span>
           </p>
         </div>

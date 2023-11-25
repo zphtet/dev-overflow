@@ -3,16 +3,16 @@ import Question from "@/database/models/question.model";
 import { createQuestionParams } from "./shared.types";
 import connectDB from "@/database/connectDB";
 import Tag from "@/database/models/tag.model";
-import { Schema } from "mongoose";
+import { revalidatePath } from "next/cache";
+import User from "@/database/models/user.model";
 export const createQuestion = async ({
   title,
   content,
   tags,
   author,
+  path,
 }: createQuestionParams) => {
   await connectDB();
-  // console.log(title, content, tags);
-  // return;
   const createdQuestion = await Question.create({
     title,
     content,
@@ -42,5 +42,17 @@ export const createQuestion = async ({
     { new: true }
   );
 
+  if (path) {
+    revalidatePath(path!);
+  }
   console.log("Question created successfully", updatedQuestion);
+};
+
+export const getQuestions = async () => {
+  await connectDB();
+  const questions = await Question.find({})
+    .sort({ createdAt: -1 })
+    .populate("tags")
+    .populate("author");
+  return questions;
 };
