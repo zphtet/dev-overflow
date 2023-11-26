@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Tag from "./Tag";
-
+import { formatDistance } from "date-fns";
 const Card = ({ data }: { data: any }) => {
   console.log(data);
   return (
@@ -20,15 +20,18 @@ const Card = ({ data }: { data: any }) => {
       <div className="flex md:items-center justify-between md:flex-row flex-col gap-3">
         <div className="flex items-center gap-1">
           <Image
-            src={"/assets/icons/user.svg"}
-            alt="profile pic"
+            src={data.author.picture}
+            alt={`${data.author.name} profile picture`}
             width={"18"}
             height={"18"}
-            className="invert border rounded-full"
+            className=" border rounded-full"
           />
           <p className="text-sm">
             {data.author?.name}
-            <span className="text-[12px]">. asked 30 days ago</span>
+            <span className="text-[12px]">
+              . asked{" "}
+              {formatDistance(data.createdAt, Date.now(), { addSuffix: true })}
+            </span>
           </p>
         </div>
         <div className="flex gap-2 sm:gap-5 items-center">

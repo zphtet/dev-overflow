@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import AskQuestionBtn from "./components/ask-ques-btn";
 import SearchInput from "./components/search-input";
 import Tag from "./components/Tag";
 import Filter from "./components/Filter";
@@ -14,9 +14,7 @@ export default async function Home() {
     <div className="h-[200vh]">
       <div className="flex items-center justify-between">
         <h4 className="font-bold text-2xl">All Questions</h4>
-        <Button variant={"default"} className="main-gradient-bg ">
-          Ask a Question
-        </Button>
+        <AskQuestionBtn />
       </div>
       <div className="sm:py-5 py-3">
         <SearchInput placeholder="search ... " />

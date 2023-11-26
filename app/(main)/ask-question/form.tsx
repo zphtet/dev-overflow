@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -14,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { KeyboardEvent, useRef } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { createQuestion } from "@/app/action/question";
 import { useRouter } from "next/navigation";
@@ -29,6 +30,7 @@ const formSchema = z.object({
 
 const AskQuestionForm = ({ userId }: { userId: string }) => {
   // 1. Define your form.
+  const [creating, setCreating] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,9 +45,7 @@ const AskQuestionForm = ({ userId }: { userId: string }) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    setCreating(true);
     await createQuestion({
       title: values.title,
       content: values.explaination,
@@ -53,7 +53,8 @@ const AskQuestionForm = ({ userId }: { userId: string }) => {
       author: userId,
       path: "/",
     });
-    console.log("Create question successfully");
+
+    setCreating(false);
     router.push("/");
   }
 
@@ -225,7 +226,12 @@ const AskQuestionForm = ({ userId }: { userId: string }) => {
           )}
         />
         <div className="flex justify-end">
-          <Button variant={"default"} className="main-gradient-bg ">
+          <Button
+            disabled={creating}
+            variant={"default"}
+            className="main-gradient-bg "
+          >
+            {creating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Ask a Question
           </Button>
         </div>

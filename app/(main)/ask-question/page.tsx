@@ -1,12 +1,14 @@
 import { getUser } from "@/app/action/user";
 import AskQuestionForm from "./form";
+import { auth } from "@clerk/nextjs";
 
 const AskQuestion = async () => {
   // await connectDB();
-  const user = await getUser("clerk123");
-  console.log(user, "clerk user");
+  const { userId } = auth();
+  console.log(userId, "userid");
+  const user = await getUser(userId!);
+  console.log(user, "getuser");
   const id = user._id.toString();
-  console.log(id, "userid ");
   return (
     <div>
       <div>
