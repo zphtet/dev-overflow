@@ -59,7 +59,7 @@ export async function POST(req: Request) {
       clerkId: clerkUser.id,
       name: clerkUser.username,
       username: clerkUser.username,
-      email: clerkUser.email_addresses,
+      email: clerkUser.email_addresses[0].email_address,
       picture: clerkUser.image_url,
     });
     console.log("hey user created", createdUser);
