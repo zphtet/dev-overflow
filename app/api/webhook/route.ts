@@ -55,14 +55,14 @@ export async function POST(req: Request) {
   if (eventType === "user.created") {
     // save user to db
     const clerkUser = evt.data;
-    const createdUser = await User.create({
-      clerkId: clerkUser.id,
-      name: clerkUser.username,
-      username: clerkUser.username,
-      email: clerkUser.email_addresses[0].email_address,
-      picture: clerkUser.image_url,
-    });
-    console.log("hey user created", createdUser);
+    // const createdUser = await User.create({
+    //   clerkId: clerkUser.id,
+    //   name: clerkUser.username,
+    //   username: clerkUser.username,
+    //   email: clerkUser.email_addresses[0].email_address,
+    //   picture: clerkUser.image_url,
+    // });
+    // console.log("hey user created", createdUser);
   }
   if (eventType === "user.updated") {
     const clerkUser = evt.data;
