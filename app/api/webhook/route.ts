@@ -1,7 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
-
+import User from "@/database/models/user.model";
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -49,23 +49,42 @@ export async function POST(req: Request) {
   }
 
   // Get the ID and type
-  const { id } = evt.data;
+
   const eventType = evt.type;
 
   if (eventType === "user.created") {
     // save user to db
-    console.log("hey user created");
+    const clerkUser = evt.data;
+    const createdUser = await User.create({
+      clerkId: clerkUser.id,
+      name: clerkUser.username,
+      username: clerkUser.username,
+      email: clerkUser.email_addresses,
+      picture: clerkUser.image_url,
+    });
+    console.log("hey user created", createdUser);
   }
   if (eventType === "user.updated") {
+    const clerkUser = evt.data;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { clerkId: clerkUser.id },
+      { name: clerkUser.username, username: clerkUser.username },
+      { new: true }
+    );
     //   update user to db
-    console.log("hey user updated");
+    console.log("hey user updated", updatedUser);
   }
   if (eventType === "user.deleted") {
     // delete user from db
+    const clerkUser = evt.data;
+    await User.deleteMany({ clerkId: clerkUser.id });
     console.log("user deleted");
   }
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
+  // console.log(
+  //   `Webhook with and ID of ${clerkUser.id} and type of ${eventType}`
+  // );
   console.log("Webhook body:", body);
 
   return new Response("", { status: 200 });
