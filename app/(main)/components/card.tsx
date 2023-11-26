@@ -20,7 +20,7 @@ const Card = ({ data }: { data: any }) => {
       <div className="flex md:items-center justify-between md:flex-row flex-col gap-3">
         <div className="flex items-center gap-1">
           <Image
-            src={"/"}
+            src={"/assets/icons/user.svg"}
             alt="profile pic"
             width={"18"}
             height={"18"}
