@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import "./prism.css";
+import "./prism2.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "./context/themeProvider";

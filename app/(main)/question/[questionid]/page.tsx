@@ -8,6 +8,26 @@ import Filter from "../../components/Filter";
 import { Button } from "@/components/ui/button";
 import AnswerForm from "./answer-form";
 import ParseHtml from "../../components/parse-html";
+
+const filterByData = [
+  {
+    label: "Hightest Upvotes",
+    value: "hightest-upvotes",
+  },
+  {
+    label: "Lowest Upvotes",
+    value: "lowest-upvotes",
+  },
+  {
+    label: "Recent",
+    value: "recent",
+  },
+  {
+    label: "Oldest",
+    value: "oldest",
+  },
+];
+
 const QuestionDetail = async ({
   params,
 }: {
@@ -65,7 +85,7 @@ const QuestionDetail = async ({
           {question.answers?.length} Answers
         </p>
         <div className="w-[150px]">
-          <Filter />
+          <Filter data={filterByData} />
         </div>
       </div>
       <div className="py-5">Answers Will Be Herer</div>

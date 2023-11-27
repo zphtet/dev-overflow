@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 
 import {
@@ -9,7 +10,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Filter() {
+export default function Filter({
+  data,
+}: {
+  data: { label: string; value: string }[];
+}) {
   return (
     <Select>
       <SelectTrigger className="w-full py-[22px] ring-0 focus:ring-1 focus:outline-0  ">
@@ -17,10 +22,13 @@ export default function Filter() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="apple">Newest</SelectItem>
-          <SelectItem value="banana">Recommended</SelectItem>
+          {data.map(({ label, value }) => {
+            return <SelectItem value={value}>{label}</SelectItem>;
+          })}
+
+          {/* <SelectItem value="banana">Recommended</SelectItem>
           <SelectItem value="blueberry">Unanswered</SelectItem>
-          <SelectItem value="grapes">Frequent</SelectItem>
+          <SelectItem value="grapes">Frequent</SelectItem> */}
         </SelectGroup>
       </SelectContent>
     </Select>

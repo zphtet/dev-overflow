@@ -6,6 +6,26 @@ import QuestionCards from "./components/question-cards";
 import { getQuestions } from "@/app/action/question";
 import { getUser } from "@/app/action/user";
 // import { IQuestion } from "@/database/models/question.model";
+
+const filterByData = [
+  {
+    label: "Newest",
+    value: "newest",
+  },
+  {
+    label: "Recommended",
+    value: "recommended",
+  },
+  {
+    label: "Frequent",
+    value: "requent",
+  },
+  {
+    label: "Unanswered",
+    value: "unanswered",
+  },
+];
+
 export default async function Home() {
   await getUser("fackid");
   const questions = await getQuestions();
@@ -26,7 +46,7 @@ export default async function Home() {
         <Tag text="Unanswered" />
       </div>
       <div className="sm:hidden block">
-        <Filter />
+        <Filter data={filterByData} />
       </div>
       <div className="py-5">
         <QuestionCards data={questions} />

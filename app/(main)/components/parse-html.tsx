@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 // @ts-nocheck
 // @ts-ignore
 import Prism from "prismjs";
-import "prismjs/themes/prism.css";
+// import "prismjs/themes/prism.css";
 import "prismjs/components/prism-javascript";
 // import "prismjs/components/prism-php";
 // import "prismjs/components/prism-php";
