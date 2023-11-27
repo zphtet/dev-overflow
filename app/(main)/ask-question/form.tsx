@@ -19,6 +19,7 @@ import { KeyboardEvent, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { createQuestion } from "@/app/action/question";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 const formSchema = z.object({
   title: z.string().min(5, { message: "must be 5 chars or more" }),
   explaination: z.string().min(100, { message: "must be 100 chars or more" }),
@@ -30,6 +31,7 @@ const formSchema = z.object({
 
 const AskQuestionForm = ({ userId }: { userId: string }) => {
   // 1. Define your form.
+  const { theme } = useTheme();
   const [creating, setCreating] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -152,6 +154,8 @@ const AskQuestionForm = ({ userId }: { userId: string }) => {
                       "codesample",
                       "preview",
                     ],
+                    skin: theme === "dark" ? "oxide-dark" : "oxide",
+                    content_css: theme === "dark" ? "dark" : "light",
                     toolbar:
                       "undo redo | blocks | " +
                       "codesample bold italic forecolor | alignleft aligncenter " +

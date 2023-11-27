@@ -9,6 +9,14 @@ export type createQuestionParams = {
   path?: string;
 };
 
+export type TagType = {
+  _id: Schema.Types.ObjectId;
+  name: string;
+  createdAt: Date;
+  followers: Schema.Types.ObjectId[];
+  questions: Schema.Types.ObjectId[];
+};
+
 // export type QuestionType = {
 //    _id: new ObjectId('6561f4097e240e398b171a63'),
 //   title: 'how to understand react',

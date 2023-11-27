@@ -1,5 +1,6 @@
 "use client";
 import { NavLinkType } from "@/app/types";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,6 +12,7 @@ type Props = NavLinkType & {
 const NavLink = ({ href, icon, label, isMobileNav }: Props) => {
   const pathname = usePathname();
   const active = pathname === href;
+
   return (
     <div
       className={`  rounded-md cursor-pointer nav-link  text-base ${

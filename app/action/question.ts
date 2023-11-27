@@ -4,7 +4,7 @@ import { createQuestionParams } from "./shared.types";
 import connectDB from "@/database/connectDB";
 import Tag from "@/database/models/tag.model";
 import { revalidatePath } from "next/cache";
-import User from "@/database/models/user.model";
+
 export const createQuestion = async ({
   title,
   content,
@@ -55,4 +55,12 @@ export const getQuestions = async () => {
     .populate("tags")
     .populate("author");
   return questions;
+};
+
+export const getQuestionById = async (id: string) => {
+  await connectDB();
+  const question = await Question.findById(id)
+    .populate("author")
+    .populate("tags");
+  return question;
 };
