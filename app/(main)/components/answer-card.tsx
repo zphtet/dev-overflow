@@ -29,7 +29,13 @@ const AnswerCard = ({
             answered {formatRelative(data.createdAt, Date.now())}
           </p>
         </div>
-        <VoteArrs />
+        <VoteArrs
+          upvotes={data.upvotes.length}
+          downvotes={data.downvotes.length}
+          type="answer"
+          hasUpvoted={false}
+          hasDownvoted={false}
+        />
       </div>
       <ParseHtml content={data.content} />
     </div>

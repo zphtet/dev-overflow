@@ -34,7 +34,7 @@ const Answers = async ({
   if (answers.length === 0) return null;
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between my-5">
         <p className="font-bold text-primary-color">0 Answers</p>
         <div className="w-[150px]">
           <Filter data={filterByData} />

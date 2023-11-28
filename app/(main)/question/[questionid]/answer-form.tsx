@@ -49,7 +49,7 @@ const AnswerForm = ({
         path: "/",
       });
       console.log("Created answer", result);
-      form.setValue("answer", "");
+      // form.setValue("answer", "");
       // @ts-ignore
       editorRef.current?.setContent("");
     } catch (e) {

@@ -19,6 +19,12 @@ const QuestionDetail = async ({
   const { userId } = auth();
   const question = await getQuestionById(params.questionid);
   const user = await getUser(userId!);
+  const hasUpvoted = question.upvotes.find(
+    (id: any) => id.toString() === user._id.toString()
+  );
+  const hasDownvoted = question.downvotes.find(
+    (id: any) => id.toString() === user._id.toString()
+  );
   console.log(question);
   return (
     <div>
@@ -36,7 +42,15 @@ const QuestionDetail = async ({
         </div>
 
         <div className=" flex items-center gap-3">
-          <VoteArrs />
+          <VoteArrs
+            upvotes={question.upvotes.length}
+            downvotes={question.downvotes.length}
+            type="question"
+            hasUpvoted={hasUpvoted}
+            hasDownvoted={hasDownvoted}
+            questionId={question._id.toString()}
+            userId={user._id.toString()}
+          />
           <button>
             <Image
               src={"/assets/icons/star-red.svg"}

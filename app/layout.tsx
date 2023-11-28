@@ -5,6 +5,7 @@ import "./prism2.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "./context/themeProvider";
+import { Toaster } from "react-hot-toast";
 export const metadata: Metadata = {
   title: "DevOverflow",
   description: "this is the stack overflow clone website ",
@@ -22,6 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className}  overflow-y-hidden`}>
+          <Toaster />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

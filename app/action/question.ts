@@ -64,3 +64,99 @@ export const getQuestionById = async (id: string) => {
     .populate("tags");
   return question;
 };
+
+// votes
+
+export const questionUpvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedQuestion = await Question.findByIdAndUpdate(
+    questionId,
+    {
+      $push: { upvotes: userId },
+      $pull: { downvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedQuestion;
+};
+
+export const removeQuestionUpvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedQuestion = await Question.findByIdAndUpdate(
+    questionId,
+    {
+      $pull: { upvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedQuestion;
+};
+
+export const questionDownvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedQuestion = await Question.findByIdAndUpdate(
+    questionId,
+    {
+      $push: { downvotes: userId },
+      $pull: { upvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedQuestion;
+};
+
+export const removeQuestionDownvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedQuestion = await Question.findByIdAndUpdate(
+    questionId,
+    {
+      $pull: { downvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedQuestion;
+};
