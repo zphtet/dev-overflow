@@ -1,6 +1,20 @@
 import Filter from "../components/Filter";
 import SearchInput from "../components/search-input";
 
+const filterByData = [
+  {
+    label: "Old Users",
+    value: "old-users",
+  },
+  {
+    label: "New Users",
+    value: "new-users",
+  },
+  {
+    label: "Top Contributors",
+    value: "top-contributors",
+  },
+];
 const CommunityPage = () => {
   return (
     <div>
@@ -12,7 +26,7 @@ const CommunityPage = () => {
           <SearchInput placeholder="search ..." />
         </div>
         <div className=" sm:w-[150px]  ">
-          <Filter />
+          <Filter data={filterByData} />
         </div>
       </div>
     </div>

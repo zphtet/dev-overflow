@@ -23,7 +23,11 @@ export default function Filter({
       <SelectContent>
         <SelectGroup>
           {data.map(({ label, value }) => {
-            return <SelectItem value={value}>{label}</SelectItem>;
+            return (
+              <SelectItem key={label} value={value}>
+                {label}
+              </SelectItem>
+            );
           })}
         </SelectGroup>
       </SelectContent>

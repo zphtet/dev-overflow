@@ -6,7 +6,7 @@ import Link from "next/link";
 const Card = ({ data }: { data: any }) => {
   // console.log(data);
   return (
-    <Link href={`/question/${data._id}`}>
+    <Link href={`/question/${data._id}`} className="block">
       <div className="bg-white rounded shadow p-5 space-y-4 dark:bg-dark-300">
         <p className="font-bold text-xl line-clamp-1">{data.title}</p>
         <div className="flex items-center gap-2">

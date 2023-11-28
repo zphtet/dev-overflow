@@ -8,12 +8,6 @@ const QuestionCards = ({ data }: { data: any }) => {
       {data.map((question: any) => {
         return <Card key={question._id} data={question} />;
       })}
-      {/* <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card /> */}
     </div>
   );
 };

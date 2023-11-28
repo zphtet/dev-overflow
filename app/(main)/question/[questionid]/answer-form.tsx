@@ -14,12 +14,19 @@ import {
 } from "@/components/ui/form";
 import { Editor } from "@tinymce/tinymce-react";
 import { useTheme } from "next-themes";
-import ParseHtml from "../../components/parse-html";
+
+import { createAnswer } from "@/app/action/answer";
 const formSchema = z.object({
   answer: z.string().min(100, { message: "must be 100 chars or more" }),
 });
 
-const AnswerForm = () => {
+const AnswerForm = ({
+  questionId,
+  authorId,
+}: {
+  questionId: string;
+  authorId: string;
+}) => {
   const { theme } = useTheme();
 
   const [posting, setPosting] = useState(false);
@@ -31,8 +38,25 @@ const AnswerForm = () => {
     },
   });
   const editorRef = useRef(null);
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setPosting(true);
     console.log(values);
+    try {
+      const result = await createAnswer({
+        questionId: questionId,
+        authorId: authorId,
+        content: values.answer,
+        path: "/",
+      });
+      console.log("Created answer", result);
+      form.setValue("answer", "");
+      // @ts-ignore
+      editorRef.current?.setContent("");
+    } catch (e) {
+      console.log("error posting answer", e);
+    } finally {
+      setPosting(false);
+    }
   };
 
   return (
@@ -85,10 +109,7 @@ const AnswerForm = () => {
                       "codesample bold italic forecolor | alignleft aligncenter " +
                       "alignright alignjustify | bullist numlist outdent indent | " +
                       "removeformat | preview | help",
-                    // content_style:
-                    //   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
                   }}
-                  // {...field}
                 />
               </FormControl>
 

@@ -4,36 +4,21 @@ import VoteArrs from "../../components/votes";
 import Metrics from "../../components/metrics";
 import { TagType } from "@/app/action/shared.types";
 import Tag from "../../components/Tag";
-import Filter from "../../components/Filter";
+import Answers from "../../components/answers";
 import { Button } from "@/components/ui/button";
 import AnswerForm from "./answer-form";
 import ParseHtml from "../../components/parse-html";
-
-const filterByData = [
-  {
-    label: "Hightest Upvotes",
-    value: "hightest-upvotes",
-  },
-  {
-    label: "Lowest Upvotes",
-    value: "lowest-upvotes",
-  },
-  {
-    label: "Recent",
-    value: "recent",
-  },
-  {
-    label: "Oldest",
-    value: "oldest",
-  },
-];
+import { auth } from "@clerk/nextjs";
+import { getUser } from "@/app/action/user";
 
 const QuestionDetail = async ({
   params,
 }: {
   params: { questionid: string };
 }) => {
+  const { userId } = auth();
   const question = await getQuestionById(params.questionid);
+  const user = await getUser(userId!);
   console.log(question);
   return (
     <div>
@@ -80,15 +65,14 @@ const QuestionDetail = async ({
           );
         })}
       </div>
-      <div className="flex items-center justify-between">
-        <p className="font-bold text-primary-color">
-          {question.answers?.length} Answers
-        </p>
-        <div className="w-[150px]">
-          <Filter data={filterByData} />
-        </div>
+      {/* Ansrers will be here */}
+      <div className="my-5">
+        <Answers
+          questionId={question._id.toString()}
+          authorName={user.name}
+          imgUrl={user.picture}
+        />
       </div>
-      <div className="py-5">Answers Will Be Herer</div>
       <div className="flex sm:items-center gap-4 flex-col sm:flex-row justify-between">
         <p className="font-bold">Write your answer</p>
         <Button
@@ -105,7 +89,10 @@ const QuestionDetail = async ({
         </Button>
       </div>
       <div className="py-5">
-        <AnswerForm />
+        <AnswerForm
+          questionId={question._id.toString()}
+          authorId={user._id.toString()}
+        />
       </div>
     </div>
   );
