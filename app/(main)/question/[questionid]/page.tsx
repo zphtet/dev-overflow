@@ -25,7 +25,7 @@ const QuestionDetail = async ({
   const hasDownvoted = question.downvotes.find(
     (id: any) => id.toString() === user._id.toString()
   );
-  console.log(question);
+  // console.log(question);
   return (
     <div>
       <div className="  flex items-center justify-between">
@@ -46,8 +46,8 @@ const QuestionDetail = async ({
             upvotes={question.upvotes.length}
             downvotes={question.downvotes.length}
             type="question"
-            hasUpvoted={hasUpvoted}
-            hasDownvoted={hasDownvoted}
+            hasUpvoted={hasUpvoted ? true : false}
+            hasDownvoted={hasDownvoted ? true : false}
             questionId={question._id.toString()}
             userId={user._id.toString()}
           />
@@ -85,6 +85,7 @@ const QuestionDetail = async ({
           questionId={question._id.toString()}
           authorName={user.name}
           imgUrl={user.picture}
+          userId={user._id.toString()}
         />
       </div>
       <div className="flex sm:items-center gap-4 flex-col sm:flex-row justify-between">

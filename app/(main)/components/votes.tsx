@@ -1,5 +1,11 @@
 "use client";
 import {
+  answerDownvote,
+  answerUpvote,
+  removeAnswerDownvote,
+  removeAnswerUpvote,
+} from "@/app/action/answer";
+import {
   questionDownvote,
   questionUpvote,
   removeQuestionDownvote,
@@ -59,6 +65,32 @@ const VoteArrs: React.FC<VoteProps> = ({
       });
       toast.success("upvoted");
     }
+
+    if (type === "answer") {
+      if (upvote) {
+        setUpvote(false);
+        setUpvoteCount((prev) => prev - 1);
+        await removeAnswerUpvote({
+          questionId: questionId,
+          userId: userId,
+          path: `/question/${questionId}`,
+        });
+        toast.success("upvote removed");
+        return;
+      }
+      if (downvote) {
+        setDownvoteCount((prev) => prev - 1);
+      }
+      setUpvote(true);
+      setDownvote(false);
+      setUpvoteCount((prev) => prev + 1);
+      await answerUpvote({
+        questionId: questionId,
+        userId: userId,
+        path: `/question/${questionId}`,
+      });
+      toast.success("upvoted");
+    }
   };
   const downvoteHandler = async () => {
     if (type === "question") {
@@ -80,6 +112,31 @@ const VoteArrs: React.FC<VoteProps> = ({
       setDownvote(true);
       setDownvoteCount((prev) => prev + 1);
       await questionDownvote({
+        questionId: questionId,
+        userId: userId,
+        path: `/question/${questionId}`,
+      });
+      toast.success("downvoted");
+    }
+    if (type === "answer") {
+      if (downvote) {
+        setDownvote(false);
+        setDownvoteCount((prev) => prev - 1);
+        await removeAnswerDownvote({
+          questionId: questionId,
+          userId: userId,
+          path: `/question/${questionId}`,
+        });
+        toast.success("downvote removed");
+        return;
+      }
+      if (upvote) {
+        setUpvoteCount((prev) => prev - 1);
+      }
+      setUpvote(false);
+      setDownvote(true);
+      setDownvoteCount((prev) => prev + 1);
+      await answerDownvote({
         questionId: questionId,
         userId: userId,
         path: `/question/${questionId}`,

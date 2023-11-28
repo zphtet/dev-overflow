@@ -6,11 +6,20 @@ const AnswerCard = ({
   data,
   authorName,
   imgUrl,
+  questionId,
+  userId,
 }: {
   data: any;
   authorName: string;
   imgUrl: string;
+  questionId: string;
+  userId: string;
 }) => {
+  console.log(data, "answer-card");
+  const hasUpvoted = data.upvotes.find((id: any) => id.toString() === userId);
+  const hasDownvoted = data.downvotes.find(
+    (id: any) => id.toString() === userId
+  );
   return (
     <div className="border-b pb-5">
       <div className="flex items-center justify-between">
@@ -33,8 +42,10 @@ const AnswerCard = ({
           upvotes={data.upvotes.length}
           downvotes={data.downvotes.length}
           type="answer"
-          hasUpvoted={false}
-          hasDownvoted={false}
+          hasUpvoted={hasUpvoted ? true : false}
+          hasDownvoted={hasDownvoted ? true : false}
+          questionId={questionId}
+          userId={userId}
         />
       </div>
       <ParseHtml content={data.content} />

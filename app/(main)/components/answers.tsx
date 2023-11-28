@@ -23,11 +23,13 @@ const filterByData = [
 const Answers = async ({
   questionId,
   authorName,
+  userId,
   imgUrl,
 }: {
   questionId: string;
   authorName: string;
   imgUrl: string;
+  userId: string;
 }) => {
   const answers = await getAnswesByQuesId(questionId);
   console.log(answers, "answers from");
@@ -48,6 +50,8 @@ const Answers = async ({
               data={answer}
               authorName={authorName}
               imgUrl={imgUrl}
+              questionId={questionId}
+              userId={userId}
             />
           );
         })}

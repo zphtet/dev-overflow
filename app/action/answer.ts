@@ -38,3 +38,99 @@ export const getAnswesByQuesId = async (questionId: string) => {
 
   return answers;
 };
+
+// votes
+
+export const answerUpvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const updatedAnswer = await Answer.findOneAndUpdate(
+    { questionId },
+    {
+      $push: { upvotes: userId },
+      $pull: { downvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return updatedAnswer;
+};
+
+export const removeAnswerUpvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedAnswer = await Answer.findOneAndUpdate(
+    { questionId },
+    {
+      $pull: { upvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedAnswer;
+};
+
+export const answerDownvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedAnswer = await Answer.findOneAndUpdate(
+    { questionId },
+    {
+      $push: { downvotes: userId },
+      $pull: { upvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedAnswer;
+};
+
+export const removeAnswerDownvote = async ({
+  questionId,
+  userId,
+  path,
+}: {
+  questionId: string;
+  userId: string;
+  path: string;
+}) => {
+  const upvotedAnswer = await Answer.findOneAndUpdate(
+    { questionId },
+    {
+      $pull: { downvotes: userId },
+    },
+    {
+      new: true,
+    }
+  );
+
+  // revalidatePath(path);
+  return upvotedAnswer;
+};
