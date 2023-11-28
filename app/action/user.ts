@@ -1,3 +1,4 @@
+"use server";
 import User from "@/database/models/user.model";
 import connectDB from "@/database/connectDB";
 export const getUser = async (clerkId: string) => {

@@ -48,7 +48,7 @@ export const createQuestion = async ({
   console.log("Question created successfully", updatedQuestion);
 };
 
-export const getQuestions = async () => {
+export const getQuestions = async ({ revalide }: { revalide: number }) => {
   await connectDB();
   const questions = await Question.find({})
     .sort({ createdAt: -1 })
@@ -159,4 +159,23 @@ export const removeQuestionDownvote = async ({
 
   // revalidatePath(path);
   return upvotedQuestion;
+};
+
+export const updateViews = async ({
+  questionId,
+  count,
+}: {
+  questionId: string;
+  count: number;
+}) => {
+  const updatedQuestion = await Question.findByIdAndUpdate(
+    questionId,
+    {
+      views: count + 1,
+    },
+    { new: true }
+  );
+  revalidatePath(`/question/${questionId}`);
+  revalidatePath("/");
+  return updatedQuestion;
 };

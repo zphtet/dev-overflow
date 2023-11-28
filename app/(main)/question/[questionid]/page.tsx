@@ -1,4 +1,4 @@
-import { getQuestionById } from "@/app/action/question";
+import { getQuestionById, updateViews } from "@/app/action/question";
 import Image from "next/image";
 import VoteArrs from "../../components/votes";
 import Metrics from "../../components/metrics";
@@ -19,6 +19,7 @@ const QuestionDetail = async ({
   const { userId } = auth();
   const question = await getQuestionById(params.questionid);
   const user = await getUser(userId!);
+  await updateViews({ questionId: question._id, count: question.views });
   const hasUpvoted = question.upvotes.find(
     (id: any) => id.toString() === user._id.toString()
   );
@@ -67,7 +68,7 @@ const QuestionDetail = async ({
       <Metrics
         date={question.createdAt}
         answers={question.answers.length}
-        views={question.views}
+        views={question.views + 1}
       />
       <div className="py-5">
         <ParseHtml content={question.content} />
