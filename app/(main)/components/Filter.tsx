@@ -25,10 +25,6 @@ export default function Filter({
           {data.map(({ label, value }) => {
             return <SelectItem value={value}>{label}</SelectItem>;
           })}
-
-          {/* <SelectItem value="banana">Recommended</SelectItem>
-          <SelectItem value="blueberry">Unanswered</SelectItem>
-          <SelectItem value="grapes">Frequent</SelectItem> */}
         </SelectGroup>
       </SelectContent>
     </Select>
