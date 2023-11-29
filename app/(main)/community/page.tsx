@@ -1,6 +1,8 @@
 import Filter from "../components/Filter";
 import SearchInput from "../components/search-input";
 
+export const revalidate = 0;
+
 const filterByData = [
   {
     label: "Old Users",

@@ -10,7 +10,7 @@ import AnswerForm from "./answer-form";
 import ParseHtml from "../../components/parse-html";
 import { auth } from "@clerk/nextjs";
 import { getUser } from "@/app/action/user";
-
+import SaveBtn from "../../components/save-btn";
 const QuestionDetail = async ({
   params,
 }: {
@@ -25,6 +25,9 @@ const QuestionDetail = async ({
   );
   const hasDownvoted = question.downvotes.find(
     (id: any) => id.toString() === user._id.toString()
+  );
+  const hasSaved = user.saved.find(
+    (id: any) => id.toString() === question._id.toString()
   );
   // console.log(question);
   return (
@@ -52,14 +55,12 @@ const QuestionDetail = async ({
             questionId={question._id.toString()}
             userId={user._id.toString()}
           />
-          <button>
-            <Image
-              src={"/assets/icons/star-red.svg"}
-              alt="star image"
-              width={22}
-              height={22}
-            />
-          </button>
+          {/* saved button */}
+          <SaveBtn
+            questionId={question._id.toString()}
+            userId={user._id.toString()}
+            hasSaved={hasSaved ? true : false}
+          />
         </div>
       </div>
       <div className="py-5">

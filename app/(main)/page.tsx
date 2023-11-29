@@ -29,7 +29,7 @@ const filterByData = [
 export default async function Home() {
   await getUser("fackid");
   const questions = await getQuestions({ revalide: 0 });
-  // const questions = [];
+
   return (
     <div className="h-[200vh]">
       <div className="flex items-center justify-between">

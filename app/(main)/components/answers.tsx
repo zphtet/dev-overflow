@@ -32,7 +32,7 @@ const Answers = async ({
   userId: string;
 }) => {
   const answers = await getAnswesByQuesId(questionId);
-  console.log(answers, "answers from");
+  // console.log(answers, "answers from");
   if (answers.length === 0) return null;
   return (
     <div>

@@ -15,7 +15,7 @@ const AnswerCard = ({
   questionId: string;
   userId: string;
 }) => {
-  console.log(data, "answer-card");
+  // console.log(data, "answer-card");
   const hasUpvoted = data.upvotes.find((id: any) => id.toString() === userId);
   const hasDownvoted = data.downvotes.find(
     (id: any) => id.toString() === userId
