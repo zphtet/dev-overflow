@@ -1,5 +1,6 @@
 import Filter from "../components/Filter";
 import SearchInput from "../components/search-input";
+import Users from "../components/users";
 
 export const revalidate = 0;
 
@@ -30,6 +31,10 @@ const CommunityPage = () => {
         <div className=" sm:w-[150px]  ">
           <Filter data={filterByData} />
         </div>
+      </div>
+      <div>
+        {/* all users */}
+        <Users />
       </div>
     </div>
   );

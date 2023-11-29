@@ -50,8 +50,8 @@ export const answerUpvote = async ({
   userId: string;
   path: string;
 }) => {
-  const updatedAnswer = await Answer.findOneAndUpdate(
-    { questionId },
+  const updatedAnswer = await Answer.findByIdAndUpdate(
+    questionId,
     {
       $push: { upvotes: userId },
       $pull: { downvotes: userId },
@@ -74,8 +74,8 @@ export const removeAnswerUpvote = async ({
   userId: string;
   path: string;
 }) => {
-  const upvotedAnswer = await Answer.findOneAndUpdate(
-    { questionId },
+  const upvotedAnswer = await Answer.findByIdAndUpdate(
+    questionId,
     {
       $pull: { upvotes: userId },
     },
@@ -97,8 +97,8 @@ export const answerDownvote = async ({
   userId: string;
   path: string;
 }) => {
-  const upvotedAnswer = await Answer.findOneAndUpdate(
-    { questionId },
+  const upvotedAnswer = await Answer.findByIdAndUpdate(
+    questionId,
     {
       $push: { downvotes: userId },
       $pull: { upvotes: userId },
@@ -121,8 +121,8 @@ export const removeAnswerDownvote = async ({
   userId: string;
   path: string;
 }) => {
-  const upvotedAnswer = await Answer.findOneAndUpdate(
-    { questionId },
+  const upvotedAnswer = await Answer.findByIdAndUpdate(
+    questionId,
     {
       $pull: { downvotes: userId },
     },

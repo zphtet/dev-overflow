@@ -31,7 +31,7 @@ export default async function Home() {
   const questions = await getQuestions({ revalide: 0 });
 
   return (
-    <div className="h-[200vh]">
+    <div className="">
       <div className="flex items-center justify-between">
         <h4 className="font-bold text-2xl">All Questions</h4>
         <AskQuestionBtn />

@@ -12,7 +12,8 @@ import {
   removeQuestionUpvote,
 } from "@/app/action/question";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 type VoteProps = {
@@ -38,7 +39,13 @@ const VoteArrs: React.FC<VoteProps> = ({
   const [downvote, setDownvote] = useState(hasDownvoted);
   const [upvoteCount, setUpvoteCount] = useState(upvotes);
   const [downvoteCount, setDownvoteCount] = useState(downvotes);
+  const router = useRouter();
 
+  // useEffect(() => {
+  //   return () => {
+  //     router.refresh();
+  //   };
+  // }, []);
   const upvoteHandler = async () => {
     if (type === "question") {
       if (upvote) {

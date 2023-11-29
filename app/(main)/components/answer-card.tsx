@@ -44,7 +44,7 @@ const AnswerCard = ({
           type="answer"
           hasUpvoted={hasUpvoted ? true : false}
           hasDownvoted={hasDownvoted ? true : false}
-          questionId={questionId}
+          questionId={data._id.toString()}
           userId={userId}
         />
       </div>
