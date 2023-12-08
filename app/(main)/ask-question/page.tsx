@@ -8,7 +8,7 @@ const AskQuestion = async () => {
   console.log(userId, "userid");
   const user = await getUser(userId!);
   console.log(user, "getuser");
-  const id = user._id.toString();
+  const id = user?._id.toString();
   return (
     <div>
       <div>

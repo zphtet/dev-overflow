@@ -41,11 +41,7 @@ const VoteArrs: React.FC<VoteProps> = ({
   const [downvoteCount, setDownvoteCount] = useState(downvotes);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   return () => {
-  //     router.refresh();
-  //   };
-  // }, []);
+
   const upvoteHandler = async () => {
     if (type === "question") {
       if (upvote) {

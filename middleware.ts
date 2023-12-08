@@ -7,7 +7,6 @@ export default authMiddleware({
   publicRoutes: [
     "/",
     "/community",
-    "/ask-question",
     "/api/webhook(.*)",
     "/api/questions",
   ],
